@@ -3,6 +3,7 @@ import pandas as pd
 from io import BytesIO
 from LinearProgram import solve_timetabling
 
+st.set_page_config(layout="wide")
 # Streamlit UI
 st.title("Klausuren Zeitplanungs Solver")
 
@@ -15,14 +16,17 @@ def create_editable_table(data, key):
 
 # Store edited DataFrames
 with col1:
+    st.write("### Klausuren")
     Klausurs_df = create_editable_table({"Klausur": ["Mathematik", "Physik", "Chemie", "Biologie", "Geschichte"], 
-                                     "Fixer Zeitpunkt": ["Dienstag, 09:00", "", "", "", ""]}, "exams")
+                                     "Fixes Zeitfenster (optional)": ["Dienstag, 09:00", "", "", "", ""]}, "exams")
 
 with col2:
+    st.write("### Studenten")
     students_df = create_editable_table({"Student": ["Alice", "Alice", "Bob", "Bob", "Charlie", "Charlie", "David", "David", "Eva", "Eva", "Frank", "Frank", "Grace", "Grace", "Henry", "Henry", "Irene", "Irene", "Jack", "Jack", "Katie", "Katie", "Liam", "Liam"], 
                                      "Klausur": ["Mathematik", "Physik", "Mathematik", "Chemie", "Biologie", "Geschichte", "Physik", "Chemie", "Mathematik", "Geschichte", "Physik", "Chemie", "Mathematik", "Biologie", "Chemie", "Geschichte", "Physik", "Geschichte", "Biologie", "Geschichte", "Mathematik", "Chemie", "Physik", "Biologie"]}, "students")
 
 with col3:
+    st.write("### Zeitfenster")
     time_slots_df = create_editable_table({"Zeitfenster": ["Montag, 09:00", "Montag, 14:00", "Dienstag, 09:00", "Dienstag, 14:00"]}, "time_slots")
 
 # Process the timetable
