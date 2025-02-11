@@ -4,6 +4,8 @@ import pulp
 def solve_timetabling(Klausurs_df, students_df, time_slots_df):
     # Extract data
     Klausurs = Klausurs_df["Klausur"].tolist()
+    fixed =  Klausurs_df["Fixer Zeitpunkt"][Klausurs_df["Fixer Zeitpunkt"] != ''] 
+    fixed = fixed.reset_index().values.tolist()
     time_slots = time_slots_df["Zeitfenster"].tolist()
 
     # Student Klausur Registrations (convert DataFrame to dictionary)
@@ -30,6 +32,11 @@ def solve_timetabling(Klausurs_df, students_df, time_slots_df):
     # Constraints
     for e in Klausurs:
         prob += pulp.lpSum(x[e, t] for t in time_slots) == 1, f"One_Slot_{e}"
+    
+    print(fixed)
+    for e in fixed:
+        assert e[1] in time_slots, "Fixer Zeitpunkt nicht in in Zeitfenster Tabelle definiert!"
+        prob += pulp.lpSum(x[Klausurs[e[0]], e[1]]) == 1, f"Fixed_{e}"
 
     for student, registered_Klausurs in students.items():
         for t in time_slots:

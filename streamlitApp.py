@@ -14,14 +14,14 @@ col1, col2, col3 = st.columns(3)
 def create_editable_table(data, key):
     return st.data_editor(pd.DataFrame(data), key=key, num_rows="dynamic", height=300)
 
-Klausurs_data = {"Klausur": ["Mathematik", "Physik", "Chemie", "Biologie", "Geschichte"]}
+Klausurs_data = {"Klausur": ["Mathematik", "Physik", "Chemie", "Biologie", "Geschichte"], "Fixer Zeitpunkt": ["Dienstag, 09:00","","","",""]}
 students_data = {"Student": ["Alice", "Alice", "Bob", "Bob", "Charlie", "Charlie", "David", "David", "Eva", "Eva", "Frank", "Frank", "Grace", "Grace", "Henry", "Henry", "Irene", "Irene", "Jack", "Jack", "Katie", "Katie", "Liam", "Liam"], "Klausur": ["Mathematik", "Physik", "Mathematik", "Chemie", "Biologie", "Geschichte", "Physik", "Chemie", "Mathematik", "Geschichte", "Physik", "Chemie", "Mathematik", "Biologie", "Chemie", "Geschichte", "Physik", "Geschichte", "Biologie", "Geschichte", "Mathematik", "Chemie", "Physik", "Biologie"]}
 time_slots_data = {"Zeitfenster": ["Montag, 09:00", "Montag, 14:00", "Dienstag, 09:00", "Dienstag, 14:00"]}
 
 
 with col1:
     st.write("### Klausuren")
-    Klausurs_df = create_editable_table(Klausurs_data, "Klausurs")
+    Klausurs_df = create_editable_table(Klausurs_data, "exams")
 with col2:
     st.write("### Studenten")
     students_df = create_editable_table(students_data, "students")
